@@ -4,10 +4,11 @@ $lightSquares: #e8decb;
 $boardDimension: 564px;
 $squareDimension: 70px;
 $fontSize: 2.5em;
+$family: 'Montserrat', sans-serif;
 
 body {
   background: $backgroundColor;
-
+  font-family: $family;
 }
 
 .chessBoard{
@@ -45,7 +46,7 @@ body {
 .rankList {
   position:absolute;
   left: -60px;
-  top: 10px;
+  top: 14px;
   font-size: $fontSize;
 }
 
@@ -60,10 +61,6 @@ body {
   position: absolute;
   font-size: $fontSize;
   top: -50px;
-  // left: 6px;
-  // float: left;
-  // list-style: none;
-  // text-align: center;
 }
 
 .file {
@@ -71,12 +68,11 @@ body {
   width: $squareDimension;
   height: $squareDimension;
   text-align: center;
-  margin-left: -1px;
 }
 
 // Styling for the buttons
 .buttonContainer {
   position: absolute;
-  bottom: 10px;
-  left: 46%;
+  bottom: -30px;
+  left: 35%;
 }

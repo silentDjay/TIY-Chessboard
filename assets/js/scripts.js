@@ -5,6 +5,26 @@
 $(function () {
   "use strict";
 
+  $("#rewind").on("click", function () {
+    console.log("rw");
+  });
+
+  $("#stepBack").on("click", function () {
+    console.log("sb");
+  });
+
+  $("#play").on("click", function () {
+    console.log("play");
+  });
+
+  $("#stepForward").on("click", function () {
+    console.log("sf");
+  });
+
+  $("#fastForward").on("click", function () {
+    console.log("ff");
+  });
+
 
 
 
