@@ -28,15 +28,16 @@ body {
   box-sizing: border-box;
   text-align: center;
   font-size: $fontSize;
-  padding-top: 20px;
+  padding-top: 14px;
 }
 
 .ltSquare {
-  // background: $lightSquares;
+  float: left;
 }
 
 .dkSquare {
   background: $darkSquares;
+  float: left;
 }
 
 // styling for the rank and file labels
@@ -71,4 +72,11 @@ body {
   height: $squareDimension;
   text-align: center;
   margin-left: -1px;
+}
+
+// Styling for the buttons
+.buttonContainer {
+  position: absolute;
+  bottom: 10px;
+  left: 46%;
 }
