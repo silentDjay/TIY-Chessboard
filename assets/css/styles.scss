@@ -24,6 +24,7 @@ body {
 
 .square {
   display: inline-block;
+  float: left;
   width: $squareDimension;
   height: $squareDimension;
   box-sizing: border-box;
@@ -33,12 +34,20 @@ body {
 }
 
 .ltSquare {
-  float: left;
+  // float: left;
 }
+
+
+//this attempt didn't seem to make too much sense - not worth trying
+// $class-slug: square !default
+//
+// @square $i from 1 through 64
+//     .#{$class-slug}-#{$i}
+//     width: 60px + $i
 
 .dkSquare {
   background: $darkSquares;
-  float: left;
+  // float: left;
 }
 
 // styling for the rank and file labels
@@ -65,6 +74,7 @@ body {
 
 .file {
   display: inline-block;
+  float: left;
   width: $squareDimension;
   height: $squareDimension;
   text-align: center;

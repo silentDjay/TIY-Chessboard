@@ -14,6 +14,7 @@ body {
 
 .square {
   display: inline-block;
+  float: left;
   width: 70px;
   height: 70px;
   box-sizing: border-box;
@@ -21,12 +22,8 @@ body {
   font-size: 2.5em;
   padding-top: 14px; }
 
-.ltSquare {
-  float: left; }
-
 .dkSquare {
-  background: #8aad98;
-  float: left; }
+  background: #8aad98; }
 
 .rankList {
   position: absolute;
@@ -46,6 +43,7 @@ body {
 
 .file {
   display: inline-block;
+  float: left;
   width: 70px;
   height: 70px;
   text-align: center; }
