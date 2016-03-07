@@ -170,14 +170,14 @@ $(document).ready( function () {
   });
 
   $("#play").on("click", function (play) {
+  // $("#play").click(function (play) {
     // play through the remaining sequence, with a delay between each move
 
-    setInterval(function() { //do what's inside this thing
+    var playGame = setInterval(function() { //do what's inside this thing
       if (move < gamePlay.length - 1){ // only play next moves when you can
         move += 1; // add 1 to the move counter (global variable)
       } else {
-        // there are no moves to make.
-        play.stopPropagation(); // this doesnt work
+        clearInterval(playGame); // stop the interval after the last move
       }
 
       for (var i=0; i < 8; i++){
@@ -187,9 +187,10 @@ $(document).ready( function () {
       }
     }, 750); // every 3/4ths of a second
 
-  // this didn't work ... ASK SOMEBODY HOW TO DO IT!
-
-    // play.stopPropagation(); // Pause the sequence
+    //this didn't work to get the sequence to stop playing midway through
+    // $("#play").on("click", function (play) {
+    //   clearInterval(playGame);
+    // });
 
   });
 
