@@ -17,68 +17,164 @@ $(document).ready( function () {
   var bKnight = "&#9822";
   var bPawn = "&#9823";
 
-  //should I put all of the moves into an array? That way, I can just call moves[1] when the first move happens, moves[2] with the second, moves[0] for the beginning, etc...
-  var newGame = [
-    [wRook,wKnight,wBishop,wQueen,wKing,wBishop,wKnight,wRook],
+  var gamePlay = // this array of arrays of arrays contains the positioning of each move
+  [
+    [ // gamePlay[0] starting position
+    [wRook,wKnight,wBishop,wKing,wQueen,wBishop,wKnight,wRook],
     [wPawn,wPawn,wPawn,wPawn,wPawn,wPawn,wPawn,wPawn],
     [" "," "," "," "," "," "," "," "],
     [" "," "," "," "," "," "," "," "],
     [" "," "," "," "," "," "," "," "],
     [" "," "," "," "," "," "," "," "],
     [bPawn,bPawn,bPawn,bPawn,bPawn,bPawn,bPawn,bPawn],
-    [bRook,bKnight,bBishop,bQueen,bKing,bBishop,bKnight,bRook]
-  ];
-
-  var firstMove = [
-    [wRook,wKnight,wBishop,wQueen,wKing,wBishop,wKnight,wRook],
+    [bRook,bKnight,bBishop,bKing,bQueen,bBishop,bKnight,bRook]
+    ],
+    [ // gamePlay[1] first move...
+    [wRook,wKnight,wBishop,wKing,wQueen,wBishop,wKnight,wRook],
     [wPawn,wPawn,wPawn,wPawn," ",wPawn,wPawn,wPawn],
     [" "," "," "," "," "," "," "," "],
     [" "," "," "," ",wPawn," "," "," "],
     [" "," "," "," "," "," "," "," "],
     [" "," "," "," "," "," "," "," "],
     [bPawn,bPawn,bPawn,bPawn,bPawn,bPawn,bPawn,bPawn],
-    [bRook,bKnight,bBishop,bQueen,bKing,bBishop,bKnight,bRook]
+    [bRook,bKnight,bBishop,bKing,bQueen,bBishop,bKnight,bRook]
+    ],
+    [ // gamePlay[2] second move...
+    [wRook,wKnight,wBishop,wKing,wQueen,wBishop,wKnight,wRook],
+    [wPawn,wPawn,wPawn,wPawn," ",wPawn,wPawn,wPawn],
+    [" "," "," "," "," "," "," "," "],
+    [" "," "," "," ",wPawn," "," "," "],
+    [" "," "," "," "," "," "," "," "],
+    [" "," ",bKnight," "," "," "," "," "],
+    [bPawn,bPawn,bPawn,bPawn,bPawn,bPawn,bPawn,bPawn],
+    [bRook," ",bBishop,bKing,bQueen,bBishop,bKnight,bRook]
+    ],
+    [ // gamePlay[3]
+    [wRook,wKnight,wBishop,wKing,wQueen,wBishop,wKnight,wRook],
+    [wPawn,wPawn,wPawn,wPawn," ","",wPawn,wPawn],
+    [" "," "," "," "," "," "," "," "],
+    [" "," "," "," ",wPawn,wPawn," "," "],
+    [" "," "," "," "," "," "," "," "],
+    [" "," ",bKnight," "," "," "," "," "],
+    [bPawn,bPawn,bPawn,bPawn,bPawn,bPawn,bPawn,bPawn],
+    [bRook," ",bBishop,bKing,bQueen,bBishop,bKnight,bRook]
+    ],
+    [ // gamePlay[4]
+    [wRook,wKnight,wBishop,wKing,wQueen,wBishop,wKnight,wRook],
+    [wPawn,wPawn,wPawn,wPawn," ","",wPawn,wPawn],
+    [" "," "," "," "," "," "," "," "],
+    [" "," "," "," ",wPawn,wPawn," "," "],
+    [" "," "," "," "," "," "," "," "],
+    [" "," ",bKnight,bPawn," "," "," "," "],
+    [bPawn,bPawn,bPawn," ",bPawn,bPawn,bPawn,bPawn],
+    [bRook," ",bBishop,bKing,bQueen,bBishop,bKnight,bRook]
+    ],
+    [ // gamePlay[5]
+    [wRook,wKnight,wBishop,wKing,wQueen,wBishop,wKnight,wRook],
+    [wPawn," ",wPawn,wPawn," ","",wPawn,wPawn],
+    [" ",wPawn," "," "," "," "," "," "],
+    [" "," "," "," ",wPawn,wPawn," "," "],
+    [" "," "," "," "," "," "," "," "],
+    [" "," ",bKnight,bPawn," "," "," "," "],
+    [bPawn,bPawn,bPawn," ",bPawn,bPawn,bPawn,bPawn],
+    [bRook," ",bBishop,bKing,bQueen,bBishop,bKnight,bRook]
+    ],
+    [ // gamePlay[6]
+    [wRook,wKnight,wBishop,wKing,wQueen,wBishop,wKnight,wRook],
+    [wPawn," ",wPawn,wPawn," ","",wPawn,wPawn],
+    [" ",wPawn," "," "," "," "," "," "],
+    [" "," "," "," ",wPawn,wPawn," "," "],
+    [" "," "," "," ",bPawn," "," "," "],
+    [" "," ",bKnight,bPawn," "," "," "," "],
+    [bPawn,bPawn,bPawn," "," ",bPawn,bPawn,bPawn],
+    [bRook," ",bBishop,bKing,bQueen,bBishop,bKnight,bRook]
+    ],
+    [ // gamePlay[7]
+    [wRook,wKnight," ",wKing,wQueen,wBishop,wKnight,wRook],
+    [wPawn,wBishop,wPawn,wPawn," ","",wPawn,wPawn],
+    [" ",wPawn," "," "," "," "," "," "],
+    [" "," "," "," ",wPawn,wPawn," "," "],
+    [" "," "," "," ",bPawn," "," "," "],
+    [" "," ",bKnight,bPawn," "," "," "," "],
+    [bPawn,bPawn,bPawn," "," ",bPawn,bPawn,bPawn],
+    [bRook," ",bBishop,bKing,bQueen,bBishop,bKnight,bRook]
+    ],
+    [ // gamePlay[8]
+    [wRook,wKnight," ",wKing,wQueen,wBishop,wKnight,wRook],
+    [wPawn,wBishop,wPawn,wPawn," ","",wPawn,wPawn],
+    [" ",wPawn," "," "," "," "," "," "],
+    [" "," "," "," ",wPawn,wPawn," "," "],
+    [" "," "," "," ",bPawn," "," "," "],
+    [" "," ",bKnight,bPawn," "," "," "," "],
+    [bPawn,bPawn,bPawn,bBishop," ",bPawn,bPawn,bPawn],
+    [bRook," "," ",bKing,bQueen,bBishop,bKnight,bRook]
+    ],
+    [ // gamePlay[9]
+    [wRook," "," ",wKing,wQueen,wBishop,wKnight,wRook],
+    [wPawn,wBishop,wPawn,wPawn," ","",wPawn,wPawn],
+    [" ",wPawn,wKnight," "," "," "," "," "],
+    [" "," "," "," ",wPawn,wPawn," "," "],
+    [" "," "," "," ",bPawn," "," "," "],
+    [" "," ",bKnight,bPawn," "," "," "," "],
+    [bPawn,bPawn,bPawn,bBishop," ",bPawn,bPawn,bPawn],
+    [bRook," "," ",bKing,bQueen,bBishop,bKnight,bRook]
+    ],
   ];
 
+  var move = 0;//this variable is going to keep track of what move of the game we're on through the various steps forward/back/etc...
+
   //this runs upon page load and populates the board with the initial positions of the pieces
-  for (var i=0; i < firstMove.length; i++){
-    // console.log("i is " + i);
-    for (var I=0; I < newGame.length; I++){
-      console.log("i is " + i);
-      console.log("I is " + I);
-      // console.log("firstMove[i][I] is " + firstMove[i][I]);
-      // $(".square").html(firstMove[i][I]);//this did not work :) it put r in every square
-      // console.log("firstMove[i][I+1] is " + firstMove[i][I]);
-      $(".chessBoard").append('<div class="square">'+newGame[i][I]+'</div>');
+  for (var i=0; i < 8; i++){ // iterates through the rows
+    for (var I=0; I < 8; I++){ // iterates through the columns
 
-      // if i is even AND I is odd, it's a dark square OR if i is odd AND I is even, it's a dark square
-      // else, it's a light square
-      console.log(i*8 + I);//this gives a unique identifier to each square, starting at 0
-      // this function provides the correct colors to the board squares
-      if (i % 2 === 0 && I % 2 !== 0 || i % 2 !== 0 && I % 2 === 0){
-        $(".square").eq(i*8 + I).addClass("dkSquare");
+      $(".chessBoard").append('<div class="square">'+gamePlay[move][i][I]+'</div>');//populate the board with squares and chess pieces
+      // this populates the correct colors to the board squares
+      if (i % 2 === 0 && I % 2 !== 0 || i % 2 !== 0 && I % 2 === 0){// if i is even AND I is odd, it's a dark square OR if i is odd AND I is even, it's a dark square
+        $(".square").eq(i*8 + I).addClass("dkSquare");//(i*8 + I) gives a unique identifier (from 0 to 63) to each square
       } else {
-        //do nothing
+        //do nothing; it's a light square
       }
-        //  || i % 2 !== 0 && I % 2 === 0
-      // } else {
-        //do nothing
-      // }
-
-
     }
-
   }
 
   $("#rewind").on("click", function () {
-    console.log("rw");
-    //make the board go back to position newGame
-    //reset the page?
+
+    move = 0; // add 1 to the move counter (global variable)
+    console.log(move);
+    $(".square").empty();//empty the board of chess pieces so we can fill it with new ones
+
+    for (var i=0; i < 8; i++){
+      for (var I=0; I < 8; I++){
+        $(".square").eq(i*8 + I).html(gamePlay[move][i][I]);//populate the tiles with the correct pieces
+        if (i % 2 === 0 && I % 2 !== 0 || i % 2 !== 0 && I % 2 === 0){
+          $(".square").eq(i*8 + I).addClass("dkSquare");
+        } else {
+        }
+      }
+    }
+
   });
 
   $("#stepBack").on("click", function () {
-    console.log("sb");
-    //undo the last move
+
+    if (move > 0){ // only step back when you can
+      move -= 1; // subtract 1 from the move counter (global variable)
+    } else {
+      // don't step back
+    }
+
+    console.log(move);
+    $(".square").empty();//empty the board of chess pieces so we can fill it with new ones
+
+    for (var i=0; i < 8; i++){
+      for (var I=0; I < 8; I++){
+        $(".square").eq(i*8 + I).html(gamePlay[move][i][I]);//populate the tiles with the correct pieces
+        if (i % 2 === 0 && I % 2 !== 0 || i % 2 !== 0 && I % 2 === 0){
+          $(".square").eq(i*8 + I).addClass("dkSquare");
+        } else {
+        }
+      }
+    }
   });
 
   $("#play").on("click", function () {
@@ -87,31 +183,43 @@ $(document).ready( function () {
   });
 
   $("#stepForward").on("click", function () {
-    console.log("sf");
-    //execute the next move
-    // put the current Move
-    // do the nested for loop thing? I kinda want to try it. It should work, but there's a better way to do it.
-    for (var i=0; i < firstMove.length; i++){
-      console.log("i is " + i);
-      for (var I=0; I < firstMove[i].length; I+=2){
-        console.log("I is " + I);
-        // console.log("firstMove[i][I] is " + firstMove[i][I]);
-        // $(".square").html(firstMove[i][I]);//this did not work :) it put r in every square
-        // console.log("firstMove[i][I+1] is " + firstMove[i][I]);
-        $(".chessBoard").append('<div class="square">'+firstMove[i][I]+'</div><div class="square">'+firstMove[i][I+1]+'</div>');
 
-        // $(".square").
-
-        // <div class='square dkSquare'>"+firstMove[i][I+1]+"</div>
-      }
-
+    if (move < gamePlay.length - 1){ // only move forward when you can
+      move += 1; // add 1 to the move counter (global variable)
+    } else {
+      // there is no next move
     }
 
-    });
+    console.log(move);
+    $(".square").empty();//empty the board of chess pieces so we can fill it with new ones
+
+    for (var i=0; i < 8; i++){
+      for (var I=0; I < 8; I++){
+        $(".square").eq(i*8 + I).html(gamePlay[move][i][I]);//populate the tiles with the correct pieces
+        if (i % 2 === 0 && I % 2 !== 0 || i % 2 !== 0 && I % 2 === 0){
+          $(".square").eq(i*8 + I).addClass("dkSquare");
+        } else {
+        }
+      }
+    }
+  });
 
   $("#fastForward").on("click", function () {
-    console.log("ff");
-    //make the board go to the final step
+
+    move = gamePlay.length - 1; // move to the end of the sequence
+    console.log(move);
+    $(".square").empty();//empty the board of chess pieces so we can fill it with new ones
+
+    for (var i=0; i < 8; i++){
+      for (var I=0; I < 8; I++){
+        $(".square").eq(i*8 + I).html(gamePlay[move][i][I]);//populate the tiles with the correct pieces
+        if (i % 2 === 0 && I % 2 !== 0 || i % 2 !== 0 && I % 2 === 0){
+          $(".square").eq(i*8 + I).addClass("dkSquare");
+        } else {
+        }
+      }
+    }
+
   });
 
 
